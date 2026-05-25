@@ -1,4 +1,4 @@
-module lvlassis/example
+module lvlassis/moon-world-battle
 
 go 1.25.5
 

@@ -1,4 +1,4 @@
-module lvlassis/moon-world-battle
+module lvlassis/moon-world-turns
 
 go 1.25.5
 

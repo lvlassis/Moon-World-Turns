@@ -1,0 +1,5 @@
+name: "Charmander"
+image: "assets/charmander.png"
+life: 100
+strenght: 20
+speed: 15

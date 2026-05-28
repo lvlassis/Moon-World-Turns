@@ -15,7 +15,7 @@ type characterData struct {
 	Name  string `yaml:"name"`
 	Image string `yaml:"image"`
 	MaxLife int `yaml:"life"`
-	Strenght int `yaml:"strenght"`
+	Strength int `yaml:"strength"`
 	Speed int `yaml:"speed"`
 }
 

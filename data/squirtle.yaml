@@ -1,5 +1,5 @@
 name: "Squirtle"
 image: "assets/squirtle.png"
 life: 100
-strenght: 15
+strength: 15
 speed: 20

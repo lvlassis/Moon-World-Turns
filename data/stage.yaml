@@ -1,0 +1,25 @@
+name: "Void"
+
+ground: 
+  image: "assets/grass.png"
+  color: "Green"
+
+lights:
+
+  - type: "ambient"
+    color: 
+      red: 1.0
+      green: 1.0
+      blue: 1.0
+    intensity: 0.8
+
+  - type: "point"
+    color: 
+      red: 1.0
+      green: 0.0
+      blue: 1.0
+    intensity: 1.0
+    position:
+      x: 1.0
+      y: 0.0
+      z: 2.0

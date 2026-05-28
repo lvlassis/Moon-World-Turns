@@ -32,7 +32,7 @@ func LoadCharacter(path string) *Character {
 	// Lê o arquivo
 	data, err := os.ReadFile(path)
 	if err != nil {
-		log.Fatalf("Erro ao ler arquivo %s: %s", path, err)
+		log.Fatalf("Erro ao ler Character %s: %s", path, err)
 	}
 
 	// Faz unmarshal do YAML

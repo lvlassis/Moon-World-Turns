@@ -1,13 +1,15 @@
 package game
 
 import (
+	"time"
+
 	"github.com/g3n/engine/app"
 	"github.com/g3n/engine/camera"
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/gui"
 	"github.com/g3n/engine/renderer"
+	"github.com/g3n/engine/util/helper"
 	"github.com/g3n/engine/window"
-	"time"
 )
 
 type Game struct {
@@ -18,7 +20,12 @@ type Game struct {
 	Opponent 	*Character
 }
 
-func NewGame() *Game {
+func NewGame(player string, opponent string, stage string) *Game {
+	/* 
+		Instancia o aplicativo, a cena e a câmera.
+		Faz todo o boilerplate inicial necessário.
+	*/
+
 	// Create application and scene
 	a := app.App()
 	scene := core.NewNode()
@@ -52,11 +59,30 @@ func NewGame() *Game {
 			a.Exit()
 		}
 	})
+
+	// Instancia o player, o oponente e o stage usando os arquivos YAML
+	playerChar := LoadCharacter(player)
+	playerChar.Sprite.SetPosition(-1, 0.5, 0)
+	scene.Add(playerChar.Sprite)
+
+	opponentChar := LoadCharacter(opponent)
+	opponentChar.Sprite.SetPosition(1, 0.5, 0)
+	scene.Add(opponentChar.Sprite)
+
+	stageObj := LoadStage(stage)
+	scene.Add(stageObj)
+
+	// Adiciona eixos para referência
+	scene.Add(helper.NewAxes(0.5))
+
+	// Instancia a UI
 	
 	return &Game{
 		Application: a,
 		Scene: scene,
 		Cam: cam,
+		Player: playerChar,
+		Opponent: opponentChar,
 	}
 }
 

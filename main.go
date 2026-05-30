@@ -9,7 +9,6 @@ import (
 	"github.com/g3n/engine/gui"
 	"github.com/g3n/engine/math32"
 	"github.com/g3n/engine/renderer"
-	"github.com/g3n/engine/util/helper"
 	"github.com/g3n/engine/window"
 )
 
@@ -19,28 +18,17 @@ func DesenhaStatus(char *game.Character) string {
 }
 
 func main() {
-	g := game.NewGame()
+	g := game.NewGame(
+		"./data/charmander.yaml",
+		"./data/squirtle.yaml",
+		"./data/stage.yaml",
+	)
 	cam := g.Cam
 	scene := g.Scene
 
-	// Cria Char 1
-	// Load Ness sprite texture
-	char1 := game.LoadCharacter("./data/charmander.yaml")
-	char1.Sprite.SetPosition(-1, 0.5, 0)
-	scene.Add(char1.Sprite)
-	g.Player = char1
-
-	char2 := game.LoadCharacter("./data/squirtle.yaml")
-	char2.Sprite.SetPosition(1, 0.5, 0)
-	scene.Add(char2.Sprite)
-	g.Opponent = char2
-
-	stage := game.LoadStage("./data/stage.yaml")
-	scene.Add(stage)
-
-	scene.Add(helper.NewAxes(0.5))
-
 	// ------- UI ----------
+	char1 := g.Player
+	char2 := g.Opponent
 
 	// Indicador de vida
 	lifeText := gui.NewLabel("")

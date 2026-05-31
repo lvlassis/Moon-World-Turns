@@ -1,20 +1,20 @@
 package events
 
-type Broker struct {
+type Bus struct {
 	subscribers map[string][]func(evname string, ev interface{})
 }
 
-func NewBroker() *Broker {
-	return &Broker{
+func NewBus() *Bus {
+	return &Bus{
 		subscribers: make(map[string][]func(evname string, ev interface{})),
 	}
 }
 
-func (b *Broker) Subscribe(eventName string, callback func(evname string, ev interface{})) {
+func (b *Bus) Subscribe(eventName string, callback func(evname string, ev interface{})) {
 	b.subscribers[eventName] = append(b.subscribers[eventName], callback)
 }
 
-func (b *Broker) Publish(eventName string, eventData interface{}) {
+func (b *Bus) Publish(eventName string, eventData interface{}) {
 	if callbacks, found := b.subscribers[eventName]; found {
 		for _, callback := range callbacks {
 			callback(eventName, eventData)

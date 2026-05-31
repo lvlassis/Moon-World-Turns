@@ -13,6 +13,7 @@ type CharacterData struct {
 	MaxLife int `yaml:"life"`
 	Strength int `yaml:"strength"`
 	Speed int `yaml:"speed"`
+	Attacks []string `yaml:"attacks"`
 }
 
 type Character struct {

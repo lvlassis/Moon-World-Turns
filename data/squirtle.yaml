@@ -3,3 +3,7 @@ image: "assets/squirtle.png"
 life: 100
 strength: 15
 speed: 20
+attacks:
+  - "Water Gun"
+  - "Tackle"
+  - "Bubble Beam"

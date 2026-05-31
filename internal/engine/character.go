@@ -45,3 +45,12 @@ func NewCharacter(charData *CharacterData) *Character {
 		Life: charData.MaxLife,
 	}
 }
+
+func (c *Character) Attack(target *Character) {
+	damage := c.Strength
+	target.Life -= damage
+	if target.Life < 0 {
+		target.Life = 0
+	}
+	log.Printf("%s atacou %s causando %d de dano! Vida restante de %s: %d\n", c.Name, target.Name, damage, target.Name, target.Life)
+}

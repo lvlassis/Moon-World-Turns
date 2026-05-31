@@ -5,6 +5,7 @@ import (
 
 	"github.com/g3n/engine/app"
 	"github.com/g3n/engine/gls"
+	"github.com/g3n/engine/gui"
 	"github.com/g3n/engine/renderer"
 	"github.com/g3n/engine/window"
 )
@@ -16,6 +17,8 @@ type Window struct {
 
 func NewWindow(scene Scene, app *app.Application) *Window {
 
+	gui.Manager().Set(scene.GetNode())
+
 	// Callback para redimensionar a viewport
 	onResize := func(evname string, ev interface{}) {
 		// Get framebuffer size and update viewport accordingly
@@ -26,21 +29,6 @@ func NewWindow(scene Scene, app *app.Application) *Window {
 	}
 	app.Subscribe(window.OnWindowSize, onResize)
 	onResize("", nil)
-
-	// Callback para cliques de mouse
-	onMouseDown := func(evname string, ev interface{}) {
-		mouseEv := ev.(*window.MouseEvent)
-
-		// Converte para float32
-		x := float32(mouseEv.Xpos)
-		y := float32(mouseEv.Ypos)
-
-		// Se a cena for BattleScene, propaga o clique para a HUD
-		if bs, ok := scene.(*BattleScene); ok {
-			bs.GetHUD().HandleClick(x, y)
-		}
-	}
-	app.Subscribe(window.OnMouseDown, onMouseDown)
 
 	// Set background color to gray
 	app.Gls().ClearColor(0.8, 0.8, 0.8, 1.0)

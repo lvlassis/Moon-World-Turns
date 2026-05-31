@@ -70,45 +70,12 @@ func (b *Battle) GetCharacter2() *Character {
 	return b.character2
 }
 
-// PlayerAttack executa um ataque de um personagem no outro
-// attackerNum: 1 = character1 ataca, 2 = character2 ataca
-func (b *Battle) PlayerAttack(attackerNum int) {
-	var attacker, defender *Character
-
-	// Define atacante e defensor
-	if attackerNum == 1 {
-		attacker = b.character1
-		defender = b.character2
-	} else {
-		attacker = b.character2
-		defender = b.character1
-	}
-
-	// Verifica se é o turno do atacante
-	if b.choosing != attacker {
-		fmt.Printf("Não é o turno de %s!\n", attacker.Name)
+func (b *Battle) Attack(attacker *Character, defender *Character) {
+	if attacker != b.choosing {
+		fmt.Printf("Não é a vez de %s atacar!\n", attacker.Name)
 		return
 	}
-
-	// Calcula dano (por enquanto usa força do atacante)
-	damage := attacker.Strength
-
-	// Aplica dano
-	defender.Life -= damage
-	if defender.Life < 0 {
-		defender.Life = 0
-	}
-
-	fmt.Printf("%s atacou %s causando %d de dano! (%d HP restante)\n",
-		attacker.Name, defender.Name, damage, defender.Life)
-
-	// Verifica se a batalha acabou
-	if defender.Life <= 0 {
-		fmt.Printf("%s venceu a batalha!\n", attacker.Name)
-		return
-	}
-
-	// Passa o turno
+	attacker.Attack(defender)
 	b.nextTurn()
 }
 

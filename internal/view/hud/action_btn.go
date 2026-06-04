@@ -2,12 +2,12 @@ package hud
 
 import (
 	"fmt"
-	"lvlassis/moon-world-turns/internal/engine"
+	"lvlassis/moon-world-turns/internal/game"
 
 	"github.com/g3n/engine/gui"
 )
 
-func NewActionButton(label string, character *engine.Character, action engine.Action,) *gui.Button {
+func NewActionButton(label string, character *game.Character, action game.Action,) *gui.Button {
 	action_btn := gui.NewButton(label)
 	action_btn.SetPosition(20, 80)
 	action_btn.SetSize(100, 40)

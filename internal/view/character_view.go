@@ -2,7 +2,7 @@ package view
 
 import (
 	"log"
-	"lvlassis/moon-world-turns/internal/engine"
+	"lvlassis/moon-world-turns/internal/game"
 	"github.com/g3n/engine/gls"
 	"github.com/g3n/engine/graphic"
 	"github.com/g3n/engine/material"
@@ -15,7 +15,7 @@ type CharacterView struct {
 	Sprite *graphic.Sprite
 }
 
-func NewCharacterView(charData *engine.CharacterData) *CharacterView {
+func NewCharacterView(charData *game.CharacterData) *CharacterView {
 
 	// Carrega a imagem em uma textura
 	char_texture, err := texture.NewTexture2DFromImage(charData.Image)

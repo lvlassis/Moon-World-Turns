@@ -2,7 +2,7 @@ package view
 
 import (
 	"log"
-	"lvlassis/moon-world-turns/internal/engine"
+	"lvlassis/moon-world-turns/internal/game"
 
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/geometry"
@@ -15,12 +15,12 @@ import (
 )
 
 type StageView struct {
-	stageData *engine.StageData
+	stageData *game.StageData
 	*core.Node
 }
 
 
-func NewStageView(stageData *engine.StageData) *StageView {
+func NewStageView(stageData *game.StageData) *StageView {
 	stageNode := core.NewNode()
 
 	// Instancia o chão

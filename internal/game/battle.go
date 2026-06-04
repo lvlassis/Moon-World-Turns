@@ -1,4 +1,4 @@
-package engine
+package game
 
 import (
 	"fmt"
@@ -47,12 +47,22 @@ func (b *Battle) GetCharacter2() *Character {
 }
 
 
+func (b *Battle) GetActions(character *Character) []Action {
+	// Retorna as ações disponíveis para o personagem
+	// Isso pode incluir ataques, habilidades especiais, itens, etc.
+	return []Action{
+		{Name: "Ataque Básico", Type: "attack"},
+		{Name: "Habilidade Especial", Type: "special"},
+	}
+}
+
+
 func (b *Battle) DoAction(character *Character, action Action, target *Character) {
 	if character != b.choosing {
 		fmt.Printf("Não é a vez de %s agir!\n", character.Name)
 		return
 	}
-	character.Execute(action, target)
+	// character.Execute(action, target)
 	b.nextTurn()
 }
 

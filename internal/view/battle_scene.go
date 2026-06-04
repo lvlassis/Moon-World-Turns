@@ -1,7 +1,7 @@
 package view
 
 import (
-	"lvlassis/moon-world-turns/internal/engine"
+	"lvlassis/moon-world-turns/internal/game"
 	"lvlassis/moon-world-turns/internal/events"
 	"lvlassis/moon-world-turns/internal/view/hud"
 
@@ -17,7 +17,7 @@ type BattleScene struct {
 	character1View *CharacterView
 	character2View *CharacterView
 	stage          *StageView
-	battle         *engine.Battle
+	battle         *game.Battle
 	bus            *events.Bus
 	cam            *camera.Camera
 	guiCam         *camera.Camera // Câmera ortográfica para GUI
@@ -31,7 +31,7 @@ type BattleScene struct {
 	attackButton  *gui.Button
 }
 
-func NewBattleScene(char1, char2 *CharacterView, stage *StageView, battle *engine.Battle, bus *events.Bus, width, height int) Scene {
+func NewBattleScene(char1, char2 *CharacterView, stage *StageView, battle *game.Battle, bus *events.Bus, width, height int) Scene {
 	scene := &BattleScene{
 		Node:           core.NewNode(),
 		character1View: char1,
@@ -83,7 +83,7 @@ func (bs *BattleScene) setupGUI(width, height int) {
 	bs.healthBar2 = hud.NewHealthBar(float32(width)-220, 10, 200, character_2, bs.guiRoot)
 
 	// // Cria botões de ataque
-	bs.attackButton = hud.NewActionButton("Attack", character_1, engine.Action{Name: "Attack"})
+	bs.attackButton = hud.NewActionButton("Attack", character_1, game.Action{Name: "Attack"})
 	bs.guiRoot.Add(bs.attackButton)
 
 	// Adiciona o root da GUI à cena

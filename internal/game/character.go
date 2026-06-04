@@ -1,4 +1,4 @@
-package engine
+package game
 
 import (
 	"log"
@@ -13,7 +13,7 @@ type CharacterData struct {
 	MaxLife int `yaml:"life"`
 	Strength int `yaml:"strength"`
 	Speed int `yaml:"speed"`
-	Attacks []string `yaml:"attacks"`
+	Skills []string `yaml:"skills"`
 }
 
 type Character struct {

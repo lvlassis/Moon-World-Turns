@@ -1,7 +1,7 @@
 package hud
 
 import (
-	"lvlassis/moon-world-turns/internal/engine"
+	"lvlassis/moon-world-turns/internal/game"
 
 	"github.com/g3n/engine/gui"
 	"github.com/g3n/engine/math32"
@@ -16,7 +16,7 @@ type HealthBar struct {
 }
 
 // newHealthBar cria uma nova barra de vida
-func NewHealthBar(x, y, maxWidth float32, character *engine.Character, parent *gui.Panel) *HealthBar {
+func NewHealthBar(x, y, maxWidth float32, character *game.Character, parent *gui.Panel) *HealthBar {
 	hb := &HealthBar{
 		maxWidth: maxWidth,
 	}

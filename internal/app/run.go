@@ -2,7 +2,7 @@ package app
 
 import (
 	"fmt"
-	"lvlassis/moon-world-turns/internal/engine"
+	"lvlassis/moon-world-turns/internal/game"
 	"lvlassis/moon-world-turns/internal/events"
 	"lvlassis/moon-world-turns/internal/view"
 
@@ -18,25 +18,25 @@ func Run() {
 
 	// Carrega os dados dos personagens
 	fmt.Println("Loading Charmander")
-	charmander_data := engine.LoadCharacterData("./data/charmander.yaml")
+	charmander_data := game.LoadCharacterData("./data/charmander.yaml")
 	fmt.Println("Loading Squirtle")
-	squirtle_data := engine.LoadCharacterData("./data/squirtle.yaml")
+	squirtle_data := game.LoadCharacterData("./data/squirtle.yaml")
 
 	// Carrega os dados do estágio
 	fmt.Println("Loading Stage")
-	stage_data := engine.LoadStageData("./data/stage.yaml")
+	stage_data := game.LoadStageData("./data/stage.yaml")
 
 	// Cria os personagens
-	charmander := engine.NewCharacter(charmander_data)
+	charmander := game.NewCharacter(charmander_data)
 	fmt.Println("Charmander:", charmander)
-	squirtle := engine.NewCharacter(squirtle_data)
+	squirtle := game.NewCharacter(squirtle_data)
 	fmt.Println("Squirtle:", squirtle)
 
 	// Cria o estágio
-	// stage := engine.NewStage(stage_data)
+	// stage := game.NewStage(stage_data)
 
 	// Cria a batalha
-	battle := engine.NewBattle(charmander, squirtle, bus)
+	battle := game.NewBattle(charmander, squirtle, bus)
 
 	// Cria as views dos personagens
 	charmander_view := view.NewCharacterView(charmander_data)

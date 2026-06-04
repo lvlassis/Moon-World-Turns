@@ -50,6 +50,9 @@ func (b *Battle) GetCharacter2() *Character {
 func (b *Battle) GetActions(character *Character) []Action {
 	// Retorna as ações disponíveis para o personagem
 	// Isso pode incluir ataques, habilidades especiais, itens, etc.
+
+	
+
 	return []Action{
 		{Name: "Ataque Básico", Type: "attack"},
 		{Name: "Habilidade Especial", Type: "special"},

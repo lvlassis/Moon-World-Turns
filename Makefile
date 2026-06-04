@@ -5,6 +5,6 @@ dev:
 
 build:
 	mkdir -p build
-	go build -o build/main main.go
+	go build -o build/moon-world-turns main.go
 
 

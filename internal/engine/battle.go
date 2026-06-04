@@ -21,16 +21,6 @@ func NewBattle(character1, character2 *Character, bus *events.Bus) *Battle {
 	return b
 }
 
-// GetCharacter1 retorna o primeiro personagem da batalha
-func (b *Battle) GetCharacter1() *Character {
-	return b.character1
-}
-
-// GetCharacter2 retorna o segundo personagem da batalha
-func (b *Battle) GetCharacter2() *Character {
-	return b.character2
-}
-
 
 // Inicia a batalha, definindo quem começa e aguardando as ações dos personagens
 func (b *Battle) Start() {
@@ -38,20 +28,22 @@ func (b *Battle) Start() {
 	fmt.Printf("A batalha começou entre %s e %s!\n", b.character1.Name, b.character2.Name)
 
 	// Define quem começa com base na velocidade dos personagens
-	b.choosing = b.FirstCharacter(b.character1, b.character2)
+	b.choosing = b.firstCharacter(b.character1, b.character2)
 
 	fmt.Printf("%s começa a batalha!\n", b.choosing.Name)
 	fmt.Printf("Aguardando a ação de %s...\n", b.choosing.Name)
 }
 
 
-// Define o personagem quem começa
-func (b *Battle) FirstCharacter(char1, char2 *Character) *Character {
-	if char1.Speed > char2.Speed {
-		return char1
-	} else {
-		return char2
-	}
+// GetCharacter1 retorna o primeiro personagem da batalha
+func (b *Battle) GetCharacter1() *Character {
+	return b.character1
+}
+
+
+// GetCharacter2 retorna o segundo personagem da batalha
+func (b *Battle) GetCharacter2() *Character {
+	return b.character2
 }
 
 
@@ -62,6 +54,16 @@ func (b *Battle) DoAction(character *Character, action Action, target *Character
 	}
 	character.Execute(action, target)
 	b.nextTurn()
+}
+
+
+// Define o personagem quem começa
+func (b *Battle) firstCharacter(char1, char2 *Character) *Character {
+	if char1.Speed > char2.Speed {
+		return char1
+	} else {
+		return char2
+	}
 }
 
 

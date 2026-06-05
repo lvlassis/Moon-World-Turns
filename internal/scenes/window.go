@@ -1,4 +1,4 @@
-package view
+package scenes
 
 import (
 	"time"
@@ -12,12 +12,14 @@ import (
 
 type Window struct {
 	app *app.Application
-	scene Scene
+	sceneManager *SceneManager
 }
 
-func NewWindow(scene Scene, app *app.Application) *Window {
+func NewWindow(sceneManager *SceneManager, app *app.Application) *Window {
 
-	gui.Manager().Set(scene.GetNode())
+	scn := sceneManager.GetCurrentScene()
+
+	gui.Manager().Set(scn.GetNode())
 
 	// Callback para redimensionar a viewport
 	onResize := func(evname string, ev interface{}) {
@@ -25,7 +27,7 @@ func NewWindow(scene Scene, app *app.Application) *Window {
 		width, height := app.GetSize()
 		app.Gls().Viewport(0, 0, int32(width), int32(height))
 		// Update the camera's aspect ratio
-		scene.OnResize(width, height)
+		scn.OnResize(width, height)
 	}
 	app.Subscribe(window.OnWindowSize, onResize)
 	onResize("", nil)
@@ -34,8 +36,8 @@ func NewWindow(scene Scene, app *app.Application) *Window {
 	app.Gls().ClearColor(0.8, 0.8, 0.8, 1.0)
 
 	return &Window{
-		app: app,
-		scene: scene,
+		app:          app,
+		sceneManager: sceneManager,
 	}
 }
 
@@ -44,10 +46,13 @@ func (w *Window) Run() {
 		// Limpa a Tela
 		w.app.Gls().Clear(gls.DEPTH_BUFFER_BIT | gls.STENCIL_BUFFER_BIT | gls.COLOR_BUFFER_BIT)
 
-		// Atualzia a cena
-		w.scene.Update(deltaTime.Seconds())
+		// Pega a cena atual
+		scn := w.sceneManager.GetCurrentScene()
+
+		// Atualiza a cena
+		scn.Update(deltaTime.Seconds())
 
 		// Renderiza a cena (3D + GUI)
-		w.scene.Render(renderer)
+		scn.Render(renderer)
 	})
 }

@@ -1,4 +1,4 @@
-package view
+package scenes
 
 import (
 	"github.com/g3n/engine/core"

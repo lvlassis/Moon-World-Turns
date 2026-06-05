@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"lvlassis/moon-world-turns/internal/events"
 	"lvlassis/moon-world-turns/internal/game"
-	"lvlassis/moon-world-turns/internal/view"
+	"lvlassis/moon-world-turns/internal/scenes"
 
 	"github.com/g3n/engine/app"
 )
@@ -46,20 +46,24 @@ func Run() {
 	battle := game.NewBattle(character1, character2, bus)
 
 	// Cria as views dos personagens
-	character1_view := view.NewCharacterView(character1_data)
-	character2_view := view.NewCharacterView(character2_data)
+	character1_view := scenes.NewCharacterView(character1_data)
+	character2_view := scenes.NewCharacterView(character2_data)
 
 	// Cria a view do estágio
-	stage_view := view.NewStageView(stage_data)
+	stage_view := scenes.NewStageView(stage_data)
 
 	// Obtém o tamanho inicial da janela
 	width, height := a.GetSize()
 
 	// Monta uma cena com os personagens
-	scene := view.NewBattleScene(character1_view, character2_view, stage_view, battle, bus, width, height)
+	battleScene := scenes.NewBattleScene(character1_view, character2_view, stage_view, battle, bus, width, height)
+
+	sceneManager := scenes.NewSceneManager()
+	sceneManager.AddScene("battle", battleScene)
+	sceneManager.SetCurrentScene("battle")
 
 	// Cria a janela
-	window := view.NewWindow(scene, a)
+	window := scenes.NewWindow(sceneManager, a)
 
 	// Inicia a batalha
 	battle.Start()

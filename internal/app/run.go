@@ -2,14 +2,21 @@ package app
 
 import (
 	"fmt"
-	"lvlassis/moon-world-turns/internal/game"
 	"lvlassis/moon-world-turns/internal/events"
+	"lvlassis/moon-world-turns/internal/game"
 	"lvlassis/moon-world-turns/internal/view"
 
 	"github.com/g3n/engine/app"
 )
 
 func Run() {
+	character1_path := "./data/charmander.yaml"
+	character2_path := "./data/squirtle.yaml"
+	stage_path := "./data/stage.yaml"
+
+	ar := game.GetActionRegistry()
+	fmt.Println(ar)
+
 	// Cria um app para gerenciar a janela e o loop de renderização
 	a := app.App()
 
@@ -18,29 +25,29 @@ func Run() {
 
 	// Carrega os dados dos personagens
 	fmt.Println("Loading Charmander")
-	charmander_data := game.LoadCharacterData("./data/charmander.yaml")
+	character1_data := game.LoadCharacterData(character1_path)
 	fmt.Println("Loading Squirtle")
-	squirtle_data := game.LoadCharacterData("./data/squirtle.yaml")
+	character2_data := game.LoadCharacterData(character2_path)
 
 	// Carrega os dados do estágio
 	fmt.Println("Loading Stage")
-	stage_data := game.LoadStageData("./data/stage.yaml")
+	stage_data := game.LoadStageData(stage_path)
 
 	// Cria os personagens
-	charmander := game.NewCharacter(charmander_data)
-	fmt.Println("Charmander:", charmander)
-	squirtle := game.NewCharacter(squirtle_data)
-	fmt.Println("Squirtle:", squirtle)
+	character1 := game.NewCharacter(character1_data)
+	fmt.Println("Character 1:", character1)
+	character2 := game.NewCharacter(character2_data)
+	fmt.Println("Character 2:", character2)
 
 	// Cria o estágio
 	// stage := game.NewStage(stage_data)
 
 	// Cria a batalha
-	battle := game.NewBattle(charmander, squirtle, bus)
+	battle := game.NewBattle(character1, character2, bus)
 
 	// Cria as views dos personagens
-	charmander_view := view.NewCharacterView(charmander_data)
-	squirtle_view := view.NewCharacterView(squirtle_data)
+	character1_view := view.NewCharacterView(character1_data)
+	character2_view := view.NewCharacterView(character2_data)
 
 	// Cria a view do estágio
 	stage_view := view.NewStageView(stage_data)
@@ -49,7 +56,7 @@ func Run() {
 	width, height := a.GetSize()
 
 	// Monta uma cena com os personagens
-	scene := view.NewBattleScene(charmander_view, squirtle_view, stage_view, battle, bus, width, height)
+	scene := view.NewBattleScene(character1_view, character2_view, stage_view, battle, bus, width, height)
 
 	// Cria a janela
 	window := view.NewWindow(scene, a)

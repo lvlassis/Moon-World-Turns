@@ -13,12 +13,13 @@ type CharacterData struct {
 	MaxLife int `yaml:"life"`
 	Strength int `yaml:"strength"`
 	Speed int `yaml:"speed"`
-	Skills []string `yaml:"skills"`
+	Actions []string `yaml:"actions"`
 }
 
 type Character struct {
 	CharacterData
 	Life int
+	Actions []*Action
 }
 
 func LoadCharacterData(path string) *CharacterData {
@@ -40,10 +41,24 @@ func LoadCharacterData(path string) *CharacterData {
 }
 
 func NewCharacter(charData *CharacterData) *Character {
-	return &Character{
+	c := &Character{
 		CharacterData: *charData,
 		Life: charData.MaxLife,
 	}
+
+	// Carrega as ações do Personagem
+	for _, action_id := range charData.Actions {
+		log.Printf("Carregando ação %s para personagem %s\n", action_id, charData.Name)
+		ar := GetActionRegistry()
+		action, ok := ar.Get(action_id)
+		if !ok {
+			log.Printf("Ação %s não encontrada para personagem %s\n", action_id, charData.Name)
+			continue
+		}
+		c.Actions = append(c.Actions, action)
+	}
+
+	return c
 }
 
 func (c *Character) Attack(target *Character) {

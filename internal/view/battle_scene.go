@@ -26,9 +26,7 @@ type BattleScene struct {
 	guiRoot    *gui.Panel
 	healthBar1 *hud.HealthBar
 	healthBar2 *hud.HealthBar
-
-	actionButton  *gui.Button
-	attackButton  *gui.Button
+	actionsPanel  *gui.Panel
 }
 
 func NewBattleScene(char1, char2 *CharacterView, stage *StageView, battle *game.Battle, bus *events.Bus, width, height int) Scene {
@@ -82,9 +80,8 @@ func (bs *BattleScene) setupGUI(width, height int) {
 	bs.healthBar1 = hud.NewHealthBar(20, 10, 200, character_1, bs.guiRoot)
 	bs.healthBar2 = hud.NewHealthBar(float32(width)-220, 10, 200, character_2, bs.guiRoot)
 
-	// // Cria botões de ataque
-	bs.attackButton = hud.NewActionButton("Attack", character_1, game.Action{Name: "Attack"})
-	bs.guiRoot.Add(bs.attackButton)
+	bs.actionsPanel = hud.NewActionsPanel(character_1, character_1.Actions, bs.battle)
+	bs.guiRoot.Add(bs.actionsPanel)
 
 	// Adiciona o root da GUI à cena
 	bs.Add(bs.guiRoot)

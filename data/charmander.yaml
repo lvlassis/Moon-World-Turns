@@ -2,8 +2,8 @@ name: "Charmander"
 image: "assets/charmander.png"
 life: 100
 strength: 20
-speed: 15
-attacks:
-  - "Ember"
-  - "Scratch"
-  - "Flamethrower"
+speed: 25
+actions:
+  - fireball
+  - fireball
+  - fireball
